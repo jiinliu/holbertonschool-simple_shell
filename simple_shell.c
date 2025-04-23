@@ -135,6 +135,27 @@ int main(void)
 			continue;
 		}
 
+		if (strcmp(args[0], "exit") == 0)
+		{
+			free(args);
+			free(line);
+			exit(0);
+		}
+
+		if (strcmp(args[0], "env") == 0)
+		
+		{
+			char **env = environ;
+			while (*env)
+			{
+				write(STDOUT_FILENO, *env, strlen(*env));
+				write(STDOUT_FILENO, "\n", 1);
+				env++;
+			}
+			free(args);
+			continue;
+		}
+
 		command_path = find_command(args[0]);
 		if (!command_path)
 		  {
